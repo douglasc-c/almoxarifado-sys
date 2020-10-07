@@ -82,7 +82,7 @@ class EquipamentsController extends Controller
     public function removeEquipament(Request $request)
     {
         $user = User::where('token', $request->token)->first();
-        $equipament = equipament::where('id', $request->id)->first();
+        $equipament = Equipament::where('id', $request->id)->first();
 
         if($user){
             if($equipament){
@@ -100,5 +100,16 @@ class EquipamentsController extends Controller
             return response()->json(['status' => false, 'message' => 'Equipamento não encontrado!']);
         }
         return response()->json(['status' => false, 'message' => 'Usuário não encontrado!']);
+    }
+
+    public function getEquipament()
+    {
+        $equipament = Equipament::get();
+        $user = User::get();
+
+        if($equipament){
+            return response()->json(['status' => true, 'message' => 'Todos os equipamentos!', 'Equipament' => $equipament, 'user' => $user]);
+        }
+        return response()->json(['status' => false, 'message' => 'Equipamentos não encontrados!']);
     }
 }

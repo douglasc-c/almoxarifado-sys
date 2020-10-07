@@ -97,4 +97,14 @@ class EmployeersController extends Controller
         }
         return response()->json(['status' => false, 'message' => 'Usuário não encontrado!']);
     }
+
+    public function getEmployeer()
+    {
+        $Employeer = Employeer::get();
+
+        if($Employeer){
+            return response()->json(['status' => true, 'message' => 'Todos os funcionários!', 'Employeer' => $Employeer]);
+        }
+        return response()->json(['status' => false, 'message' => 'Funcionários não encontrados!']);
+    }
 }

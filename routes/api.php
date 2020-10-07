@@ -33,11 +33,14 @@ Route::group(['middleware' => 'cors'], function(){
     Route::post('/addEmployeer', [EmployeersController::class, 'addEmployeer']);
     Route::post('/editEmployeer', [EmployeersController::class, 'editEmployeer']);
     Route::post('/removeEmployeer', [EmployeersController::class, 'removeEmployeer']);
+    Route::post('/getEmployeer', [EmployeersController::class, 'getEmployeer']);
     
 
     #Equipaments
     Route::post('/addEquipament', [EquipamentsController::class, 'addEquipament']);
     Route::post('/editEquipament', [EquipamentsController::class, 'editEquipament']);
     Route::post('/removeEquipament', [EquipamentsController::class, 'removeEquipament']);
+    Route::post('/getEquipament', [EquipamentsController::class, 'getEquipament']);
+
 
 });
