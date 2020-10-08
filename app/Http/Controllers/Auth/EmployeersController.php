@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\UserActivity;
 use App\Models\Employeer;
+use App\Models\Equipament;
 
 class EmployeersController extends Controller
 {
@@ -26,7 +27,6 @@ class EmployeersController extends Controller
                 $employeer->address = $request->address;  
                 $employeer->phone = $request->phone;  
                 $employeer->function = $request->function;  
-                $employeer->equipament_id = $request->equipament_id;
                 $employeer->save();
 
                 $activity_user = new UserActivity;
@@ -58,7 +58,6 @@ class EmployeersController extends Controller
                 $employeer->address = $request->address;
                 $employeer->phone = $request->phone;
                 $employeer->function = $request->function;
-                $employeer->equipament_id = $request->equipament_id;
                 $employeer->save();
 
                 $activity_user = new UserActivity;
@@ -98,12 +97,25 @@ class EmployeersController extends Controller
         return response()->json(['status' => false, 'message' => 'Usuário não encontrado!']);
     }
 
-    public function getEmployeer()
+    public function getEmployeers(Request $request)
     {
-        $Employeer = Employeer::get();
+        $employeers = Employeer::get();
 
-        if($Employeer){
-            return response()->json(['status' => true, 'message' => 'Todos os funcionários!', 'Employeer' => $Employeer]);
+        if($employeers){
+            return response()->json(['status' => true, 'message' => 'Todos os funcionários!', 'employeers' => $employeers]);
+        }
+        return response()->json(['status' => false, 'message' => 'Funcionários não encontrados!']);
+    }
+
+    public function getEmployeer(Request $request)
+    {
+        $employeer = Employeer::where('id', $request->id)->first();
+
+        if($employeer){
+
+            $equipaments = Equipament::where('employeer_id', $employeer->id)->get();
+
+            return response()->json(['status' => true, 'equipaments' => $equipaments, 'employeer' => $employeer]);
         }
         return response()->json(['status' => false, 'message' => 'Funcionários não encontrados!']);
     }

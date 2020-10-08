@@ -10,12 +10,12 @@ class Employeer extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'identification_number', 'document_number', 'email', 'address', 'phone', 'function', 'equipament_id',
+        'name', 'identification_number', 'document_number', 'email', 'address', 'phone', 'function',
     ];
 
     public function equipament()
     {
-        return $this->hasMany('App\Models\Equipament', 'equipament_id', 'id');
+        return $this->hasMany('App\Models\Equipament', 'id');
     }
 
     public function equipamentReturn()

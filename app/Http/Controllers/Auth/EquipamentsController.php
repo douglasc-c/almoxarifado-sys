@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Models\UserActivity;
 use App\Models\Equipament;
+use App\Models\Employeer;
 
 class EquipamentsController extends Controller
 {
@@ -55,7 +56,6 @@ class EquipamentsController extends Controller
             if($equipament){
                 $equipament->brand = $request->brand;  
                 $equipament->model = $request->model;  
-                $equipament->serial_number = $request->serial_number;  
                 $equipament->accessories = $request->accessories;
                 $equipament->access_password = $request->access_password;  
                 $equipament->icloud_email = $request->icloud_email;  
@@ -102,13 +102,12 @@ class EquipamentsController extends Controller
         return response()->json(['status' => false, 'message' => 'Usuário não encontrado!']);
     }
 
-    public function getEquipament()
+    public function getEquipaments(Request $request)
     {
-        $equipament = Equipament::get();
-        $user = User::get();
+        $equipament = Equipament::join('employeers','employeers.id','=','equipaments.employeer_id')->get();
 
         if($equipament){
-            return response()->json(['status' => true, 'message' => 'Todos os equipamentos!', 'Equipament' => $equipament, 'user' => $user]);
+            return response()->json(['status' => true, 'message' => 'Todos os equipamentos!', 'Equipament' => $equipament]);
         }
         return response()->json(['status' => false, 'message' => 'Equipamentos não encontrados!']);
     }

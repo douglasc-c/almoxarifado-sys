@@ -24,7 +24,7 @@ class CreateEquipamentsTable extends Migration
             $table->string('icloud_password');
             $table->boolean('status');
             $table->string('description')->longText()->nullable();
-            $table->integer('employeer_id')->nullable();
+            $table->integer('employeer_id')->default(1);
             $table->timestamps();
         });
     }

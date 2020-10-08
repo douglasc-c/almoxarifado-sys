@@ -22,7 +22,6 @@ class CreateEmployeersTable extends Migration
             $table->string('address');
             $table->string('phone');
             $table->string('function');
-            $table->integer('equipament_id')->nullable();
             $table->timestamps();
         });
     }
