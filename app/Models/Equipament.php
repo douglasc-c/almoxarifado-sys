@@ -10,16 +10,12 @@ class Equipament extends Model
     use HasFactory;
 
     protected $fillable = [
-        'brand', 'model', 'serial_number', 'status', 'accessories', 'access_password', 'icloud_email', 'icloud_password', 'description'
+        'brand', 'model', 'serial_number', 'status', 'accessories', 'access_password', 'icloud_email', 'icloud_password', 'description', 'employeer_id'
     ];
 
-	public function employeerReturn()
+	public function employeer()
     {
-        return $this->belongsTo('App\Models\Empolyeer');
+        return $this->belongsTo('App\Models\Employeer', 'employeer_id');
     }
 
-    public function employeer()
-    {
-        return $this->hasMany('App\Models\Equipament', 'equipament_id', 'id');
-    }
 }
