@@ -99,7 +99,7 @@ class EmployeersController extends Controller
 
     public function getEmployeers(Request $request)
     {
-        $employeers = Employeer::get();
+        $employeers = Employeer::where('name', 'like', '%'.$request->search.'%')->limit(100)->get();
 
         if($employeers){
             return response()->json(['status' => true, 'message' => 'Todos os funcionários!', 'employeers' => $employeers]);

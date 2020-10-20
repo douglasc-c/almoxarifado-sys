@@ -19,6 +19,11 @@ class EquipamentsController extends Controller
 
         if($user){
             if($equipament == null) {
+                if($request->brand == '' || $request->model == '' || $request->serial_number == '' ||
+                   $request->accessories == '' || $request->access_password == '' || $request->icloud_email == '' ||
+                   $request->icloud_password == '' || $request->status == '' || $request->description == '' ||
+                   $request->employeer_id == ''  )
+                   return response()->json(['status' => false, 'message' => 'Falta informacoes para o cadastro!']);
                 $equipament = new Equipament;
                 $equipament->brand = $request->brand;  
                 $equipament->model = $request->model;  
@@ -104,10 +109,11 @@ class EquipamentsController extends Controller
 
     public function getEquipaments(Request $request)
     {
-        $equipament = Equipament::join('employeers','employeers.id','=','equipaments.employeer_id')->get();
+        // $equipaments = Equipament::join('employeers','employeers.id','=','equipaments.employeer_id')->get();
+        $equipaments = Equipament::with('employeer')->get();
 
-        if($equipament){
-            return response()->json(['status' => true, 'message' => 'Todos os equipamentos!', 'Equipament' => $equipament]);
+        if($equipaments){
+            return response()->json(['status' => true, 'message' => 'Todos os equipamentos!', 'equipaments' => $equipaments]);
         }
         return response()->json(['status' => false, 'message' => 'Equipamentos não encontrados!']);
     }
