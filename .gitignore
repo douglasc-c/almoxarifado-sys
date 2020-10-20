@@ -8,6 +8,7 @@ node_modules/
 dist/
 .env
 composer
+env
 
 # Compiled Java class files
 *.class
