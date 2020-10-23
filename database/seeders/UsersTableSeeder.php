@@ -21,14 +21,14 @@ class UsersTableSeeder extends Seeder
             'name' => 'Admin Intergalaxy',
             'email' => 'admin@intergalaxy.dev',
             'password' => Hash::make('admin'),
-            'token' => 'CMakockOPck3p1',
+            'token' => Str::random(10),
         ]);
         
         DB::table('users')->insert([
             'name' => 'Usuario Intergalaxy',
             'email' => 'user@intergalaxy.dev',
             'password' => Hash::make('user'),
-            'token' => 'CMakockOPck3p2',
+            'token' => Str::random(10),
         ]);
 
     }
