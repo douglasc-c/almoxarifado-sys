@@ -28,7 +28,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Usuario Intergalaxy',
             'email' => 'user@intergalaxy.dev',
             'password' => Hash::make('user'),
-            'token' => 'CMakockOPck3p1',
+            'token' => 'CMakockOPck3p2',
         ]);
 
     }
